@@ -79,6 +79,14 @@
     });
   });
 
+  /* ---------- Mail links: force-open the user's mail app reliably ---------- */
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function(a){
+    a.addEventListener("click", function(e){
+      e.preventDefault();
+      window.location.href = a.getAttribute("href");
+    });
+  });
+
   /* ---------- Reveal on scroll ---------- */
   var revs = document.querySelectorAll("[data-reveal]");
   if("IntersectionObserver" in window && !reduce){
