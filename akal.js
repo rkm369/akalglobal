@@ -79,13 +79,22 @@
     });
   });
 
-  /* ---------- Mail links: force-open the user's mail app reliably ---------- */
-  document.querySelectorAll('a[href^="mailto:"]').forEach(function(a){
-    a.addEventListener("click", function(e){
-      e.preventDefault();
-      window.location.href = a.getAttribute("href");
+  /* ---------- Mail links: assembled at runtime so Cloudflare / scrapers
+       can't rewrite them (defeats "Email Address Obfuscation"). ---------- */
+  (function(){
+    var EMAIL = "hello" + "@" + "akal" + "." + "global";
+    document.querySelectorAll("[data-mail]").forEach(function(a){
+      var subj = a.getAttribute("data-mail-subject");
+      var href = "mailto:" + EMAIL + (subj ? "?subject=" + encodeURIComponent(subj) : "");
+      a.setAttribute("href", href);
+      var slot = a.querySelector(".mailtext");
+      if(slot){ slot.textContent = EMAIL; }
+      a.addEventListener("click", function(e){
+        e.preventDefault();
+        window.location.href = href;
+      });
     });
-  });
+  })();
 
   /* ---------- Reveal on scroll ---------- */
   var revs = document.querySelectorAll("[data-reveal]");
