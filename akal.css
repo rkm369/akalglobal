@@ -126,10 +126,10 @@ a{color:inherit;text-decoration:none}
   padding-top:12px; padding-bottom:12px;
 }
 .nav__brand{
-  display:flex; align-items:center; gap:11px;
-  font-family:var(--font-disp); font-weight:700; letter-spacing:.18em;
-  font-size:19px; text-transform:uppercase;
+  display:flex; align-items:center;
 }
+.nav__brand img{ height:40px; width:auto; display:block; transition:height .4s ease; }
+.nav.scrolled .nav__brand img{ height:34px; }
 .nav__chev{ color:var(--blue); font-size:20px; transform:translateY(-1px) }
 .nav__links{ display:flex; gap:34px; align-items:center; }
 .nav__links a{
@@ -537,9 +537,20 @@ a{color:inherit;text-decoration:none}
 .door__open::before{ content:""; position:absolute; }
 
 /* final CTA */
-.endcta{ position:relative; text-align:center; padding:clamp(90px,16vh,200px) var(--pad); background:#04060e; overflow:hidden; }
-.endcta__glow{ position:absolute; left:50%; top:50%; width:520px; height:520px; transform:translate(-50%,-50%); background:radial-gradient(circle, rgba(2,82,253,.22), transparent 65%); }
-.endcta h2{ position:relative; z-index:2; font-size:clamp(34px,5.4vw,76px); }
+.endcta{
+  position:relative; text-align:center; overflow:hidden;
+  min-height:clamp(620px,96vh,900px);
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+  padding:clamp(70px,12vh,140px) var(--pad) clamp(70px,12vh,130px);
+  background:#020308;
+}
+.endcta__bg{
+  position:absolute; inset:0; z-index:0;
+  background:url("assets/endcta-bg.png") center top/cover no-repeat;
+}
+.endcta__bg::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(2,3,8,.15) 0%, rgba(2,3,8,0) 30%, rgba(2,3,8,.35) 66%, rgba(2,3,8,.85) 100%); }
+.endcta__glow{ display:none; }
+.endcta h2{ position:relative; z-index:2; font-size:clamp(34px,5.4vw,76px); text-shadow:0 2px 40px rgba(0,0,0,.7); }
 .endcta__btn{
   position:relative; z-index:2; display:inline-flex; align-items:center; gap:14px; margin-top:38px;
   background:var(--blue); color:#fff; font-family:var(--font-ui); font-size:14px; letter-spacing:.14em; text-transform:uppercase;
